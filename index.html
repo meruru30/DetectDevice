@@ -1,0 +1,67 @@
+
+
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" 
+		content="width=device-width, 
+				initial-scale=1.0, 
+				minimum-scale=0.8, 
+				maximum-scale=2.0, 
+				user-scalable=yes">
+</head>
+<body>
+~ please wait ~
+</body>
+</html>
+
+<script>
+
+//uninitialized	 - 還未開始載入Has not started loading yet
+//loading		 - 載入中Is loading
+//loaded		 - Has been loaded
+//interactive	 - 已載入，文檔與用戶可以開始交互Has loaded enough and the user can interact with it
+//complete		 - 載入完成Fully loaded
+
+document.onreadystatechange = function() {
+	if (document.readyState == "complete") {
+		getMobileOperatingSystem();
+	}
+}
+/*
+document.addEventListener('DOMContentLoaded', function(){
+   console.log('2document is ready. I can sleep now'); 
+});
+*/
+
+
+/**
+ * Determine the mobile operating system.
+ * This function returns one of 'iOS', 'Android', 'Windows Phone', or 'unknown'.
+ *
+ * @returns {String}
+ */
+function getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "Windows Phone";
+    }
+
+    if (/android/i.test(userAgent)) {
+		window.location.href = "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
+        return "Android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+		window.location.href = "https://itunes.apple.com/tw/app/google-authenticator/id388497605?mt=8";
+        return "iOS";
+    }
+
+    return "unknown";
+}
+</script>
